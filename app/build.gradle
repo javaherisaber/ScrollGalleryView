@@ -6,8 +6,8 @@ android {
         applicationId "com.veinhorn.scrollgalleryview"
         minSdkVersion config.minSdk
         targetSdkVersion config.targetSdk
-        versionCode 1
-        versionName "1.0"
+        versionCode config.versionCode
+        versionName config.versionName
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
