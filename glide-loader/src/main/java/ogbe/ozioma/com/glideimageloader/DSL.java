@@ -1,4 +1,4 @@
-package ogbe.ozioma.com.glideimageloader.dsl;
+package ogbe.ozioma.com.glideimageloader;
 
 import com.veinhorn.scrollgalleryview.MediaInfo;
 

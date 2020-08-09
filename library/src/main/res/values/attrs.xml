@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ScrollGalleryView">
+        <attr name="closeIconColor" format="color"/>
+        <attr name="countTextColor" format="color" />
+        <attr name="countTextSize" format="dimension" />
+    </declare-styleable>
+</resources>

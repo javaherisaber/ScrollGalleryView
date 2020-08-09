@@ -26,7 +26,7 @@ public class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
                                    boolean isZoom, ScrollGalleryView.OnImageClickListener onImageClickListener,
                                    ScrollGalleryView.OnImageLongClickListener onImageLongClickListener,
                                    String transitionName) {
-        super(fm);
+        super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         this.mListOfMedia = listOfMedia;
         this.isZoom = isZoom;
         this.onImageClickListener = onImageClickListener;

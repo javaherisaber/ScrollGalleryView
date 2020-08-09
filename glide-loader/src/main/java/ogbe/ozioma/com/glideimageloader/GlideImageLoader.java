@@ -17,8 +17,6 @@ import com.veinhorn.scrollgalleryview.loader.MediaLoader;
 public class GlideImageLoader implements MediaLoader {
 
     private String url;
-    private int width;
-    private int height;
     private RequestOptions requestOptions;
 
     public GlideImageLoader(String url) {
@@ -27,14 +25,12 @@ public class GlideImageLoader implements MediaLoader {
                 .placeholder(R.drawable.placeholder_image);
     }
 
+    @SuppressWarnings("unused")
     public GlideImageLoader(String url, int width, int height) {
         this.url = url;
-        this.width = width;
-        this.height = height;
         requestOptions = new RequestOptions()
                 .placeholder(R.drawable.placeholder_image)
                 .override(width, height);
-
     }
 
     @Override

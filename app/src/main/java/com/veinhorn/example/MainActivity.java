@@ -1,106 +1,32 @@
 package com.veinhorn.example;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.github.ybq.android.spinkit.SpinKitView;
-import com.github.ybq.android.spinkit.style.Wave;
 import com.veinhorn.scrollgalleryview.MediaInfo;
 import com.veinhorn.scrollgalleryview.ScrollGalleryView;
-import com.veinhorn.scrollgalleryview.loader.picasso.PicassoImageLoader;
-
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
+import ogbe.ozioma.com.glideimageloader.GlideImageLoader;
 
 public class MainActivity extends AppCompatActivity {
 
-    @BindView(R.id.scroll_gallery_view)
-    protected ScrollGalleryView scrollGalleryView;
-
-    @BindView(R.id.spin_kit)
-    protected SpinKitView progressBar;
-
-    @Override protected void onCreate(Bundle savedInstanceState) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
 
-        scrollGalleryView
-                .setThumbnailSize(200)
+        ScrollGalleryView scrollGalleryView = findViewById(R.id.scroll_gallery_view);
+        scrollGalleryView.setFragmentManager(getSupportFragmentManager())
+                .setThumbnailSize(150)
                 .setZoom(true)
                 .withHiddenThumbnails(false)
                 .hideThumbnailsOnClick(true)
-                .hideThumbnailsAfter(5000)
-                .addOnImageClickListener((position) -> {
-                    Log.i(getClass().getName(), "You have clicked on image #" + position);
-                })
-                .setFragmentManager(getSupportFragmentManager());
+                .setSelectedIndex(2)
+                .addMedia(MediaInfo.mediaLoader(new GlideImageLoader("https://i.picsum.photos/id/249/960/1080.jpg?hmac=M1eYv2hPaxVrc1jgoI4o9r5YJi_Xm9kMEbaxFfQn-yU")))
+                .addMedia(MediaInfo.mediaLoader(new GlideImageLoader("https://i.picsum.photos/id/803/960/1080.jpg?hmac=HFNjRwjV8mL2POgQh45zzTc1MkBU55vgxbpwJeg7utk")))
+                .addMedia(MediaInfo.mediaLoader(new GlideImageLoader("https://i.picsum.photos/id/976/960/1080.jpg?hmac=Osd25GIpQNNUZe7y__Leq_FL83JmeoiOzVdn2CrE7DM")))
+                .addMedia(MediaInfo.mediaLoader(new GlideImageLoader("https://i.picsum.photos/id/593/960/1080.jpg?hmac=vFbBrBQQUKOhqDcf_1fMvKs6KzlF21qqS04X2tzbumo")))
+                .addMedia(MediaInfo.mediaLoader(new GlideImageLoader("https://i.picsum.photos/id/932/960/1080.jpg?hmac=DTJwQ2y6OSfcuFI6mY8rpmtWjliCxqzP1-NsVC-nICM")))
+                .build();
 
-        Wave wave = new Wave();
-        progressBar.setIndeterminateDrawable(wave);
-
-        ImagesFetcher fetcher = new ImagesFetcher();
-        fetcher.execute();
-    }
-
-    private class ImagesFetcher extends AsyncTask<Void, Void, List<String>> {
-        private static final String SERVER_URL = "https://www.freeimages.com/";
-        private static final int IMAGES_COUNT = 6;
-
-        @Override
-        protected void onPreExecute() {
-            progressBar.setVisibility(View.VISIBLE);
-        }
-
-        @Override
-        protected List<String> doInBackground(Void... params) {
-            try {
-                return getImageUrls(getImageElements(), IMAGES_COUNT);
-            } catch (IOException e) {
-                Log.e(getClass().getName(), "Cannot load image urls", e);
-            }
-            return Collections.emptyList();
-        }
-
-        @Override
-        protected void onPostExecute(List<String> imageUrls) {
-            progressBar.setVisibility(View.INVISIBLE);
-
-            for (String imageUrl : imageUrls) {
-                scrollGalleryView.addMedia(
-                        MediaInfo.mediaLoader(new PicassoImageLoader(imageUrl))
-                );
-            }
-        }
-
-        public Elements getImageElements() throws IOException {
-            return Jsoup.connect(SERVER_URL)
-                    .get()
-                    .getElementById("content")
-                    .getElementsByTag("img");
-        }
-
-        public List<String> getImageUrls(Elements imageElms, int size) {
-            List<String> images = new ArrayList<>();
-            int counter = 0;
-            for (Element imageElm : imageElms) {
-                images.add(imageElm.attr("src")); // .replace("small-previews", "large-previews"));
-                if (++counter == size) break;
-            }
-            return images;
-        }
+        scrollGalleryView.closeView.setOnClickListener(view -> finish());
     }
 }
