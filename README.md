@@ -1,8 +1,6 @@
 # ScrollGalleryView
-
-[![Build Status](https://travis-ci.org/VEINHORN/ScrollGalleryView.svg?branch=master)](https://travis-ci.org/VEINHORN/ScrollGalleryView)
+[![](https://jitpack.io/v/javaherisaber/ScrollGalleryView.svg)](https://jitpack.io/#javaherisaber/ScrollGalleryView)
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-ScrollGalleryView-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/2472)
-[![Join the chat at https://gitter.im/VEINHORN/ScrollGalleryView](https://badges.gitter.im/VEINHORN/ScrollGalleryView.svg)](https://gitter.im/VEINHORN/ScrollGalleryView?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ScrollGalleryView is a flexible library which helps you to create awesome media galleries in your Android application. It's easily integrated with the most popular image loading libraries such as Picasso, Glide and Fresco.
 
@@ -17,7 +15,7 @@ ScrollGalleryView is a flexible library which helps you to create awesome media 
 
 ## Installing
 
-Add [JitPack](https://jitpack.io) repository to your root `build.gradle` (see more details [here](https://github.com/VEINHORN/ScrollGalleryView/issues/71)):
+Add [JitPack](https://jitpack.io) repository to your root `build.gradle`:
 
 ```gradle
 allprojects {
@@ -31,7 +29,8 @@ allprojects {
 Add dependency to your module `build.gradle`:
 
 ```gradle
-implementation 'com.veinhorn.scrollgalleryview:library:1.2.6'
+implementation "com.github.javaherisaber:ScrollGalleryView:$versions.scrollGalleryView" // all libs (including media loaders)
+implementation "com.github.javaherisaber.ScrollGalleryView:library:$versions.scrollingGalleryView" // core library only
 ```
 
 ### MediaLoaders
@@ -41,19 +40,19 @@ There are several MediaLoaders implementations for most popular caching librarie
 #### Picasso
 
 ```gradle
-implementation 'com.veinhorn.scrollgalleryview:picasso-loader:1.2.4'
+implementation "com.github.javaherisaber.ScrollGalleryView:picasso-loader:$versions.scrollingGalleryView"
 ```
 
 #### Glide
 
 ```gradle
-implementation 'com.veinhorn.scrollgalleryview:glide-loader:1.2.4'
+implementation "com.github.javaherisaber.ScrollGalleryView:glide-loader:$versions.scrollingGalleryView"
 ```
 
 #### Fresco
 
 ```gradle
-implementation 'com.veinhorn.scrollgalleryview:fresco-loader:1.2.4'
+implementation "com.github.javaherisaber.ScrollGalleryView:fresco-loader:$versions.scrollingGalleryView"
 ```
 
 ## Usage
@@ -75,7 +74,7 @@ Add *ScrollGalleryView* to your layout:
 Initialize *ScrollGalleryView* in your activity:
 
 ```java
-import static com.veinhorn.scrollgalleryview.loader.picasso.dsl.DSL.*; // simplifies adding media
+import static com.veinhorn.scrollgalleryview.loader.picasso.DSL.*; // simplifies adding media
 
 public class MainActivity extends FragmentActivity {
     private ScrollGalleryView galleryView;
@@ -85,18 +84,18 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        galleryView = ScrollGalleryView
-                .from((ScrollGalleryView) findViewById(R.id.scroll_gallery_view))
-                .settings(
-                        GallerySettings
-                                .from(getSupportFragmentManager())
-                                .thumbnailSize(100)
-                                .enableZoom(true)
-                                .build()
-                )
-                .add(image("http://pirate-islands.com/wp-content/uploads/2018/07/07_Dom-Fernando-II_01-636x310.jpg"))
-                .add(image("http://povodu.ru/wp-content/uploads/2016/04/pochemu-korabl-derzitsa-na-vode.jpg"))
-                .add(video("http://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_1mb.mp4", R.mipmap.default_video))
+        ScrollGalleryView galleryView = findViewById(R.id.scroll_gallery_view);
+        galleryView.setFragmentManager(getSupportFragmentManager())
+                .setThumbnailSize(150)
+                .setZoom(true)
+                .withHiddenThumbnails(false)
+                .hideThumbnailsOnClick(true)
+                .setSelectedIndex(2)
+                .addMedia(image("https://i.picsum.photos/id/249/960/1080.jpg?hmac=M1eYv2hPaxVrc1jgoI4o9r5YJi_Xm9kMEbaxFfQn-yU"))
+                .addMedia(image("https://i.picsum.photos/id/803/960/1080.jpg?hmac=HFNjRwjV8mL2POgQh45zzTc1MkBU55vgxbpwJeg7utk"))
+                .addMedia(image("https://i.picsum.photos/id/976/960/1080.jpg?hmac=Osd25GIpQNNUZe7y__Leq_FL83JmeoiOzVdn2CrE7DM"))
+                .addMedia(image("https://i.picsum.photos/id/593/960/1080.jpg?hmac=vFbBrBQQUKOhqDcf_1fMvKs6KzlF21qqS04X2tzbumo"))
+                .addMedia(image("https://i.picsum.photos/id/932/960/1080.jpg?hmac=DTJwQ2y6OSfcuFI6mY8rpmtWjliCxqzP1-NsVC-nICM"))
                 .build();
     }
 }
