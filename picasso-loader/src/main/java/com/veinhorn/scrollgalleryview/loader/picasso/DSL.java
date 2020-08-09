@@ -1,12 +1,10 @@
-package com.ayokunlepaul.frescoloader.dsl;
+package com.veinhorn.scrollgalleryview.loader.picasso;
 
-import com.ayokunlepaul.frescoloader.FrescoMediaHelper;
 import com.veinhorn.scrollgalleryview.MediaInfo;
-
 import java.util.List;
 
 public class DSL {
-    private static FrescoMediaHelper mediaHelper = new FrescoMediaHelper();
+    private static PicassoMediaHelper mediaHelper = new PicassoMediaHelper();
 
     public static MediaInfo image(String url) {
         return mediaHelper.image(url);

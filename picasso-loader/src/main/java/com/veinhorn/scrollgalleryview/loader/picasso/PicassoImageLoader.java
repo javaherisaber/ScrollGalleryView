@@ -10,7 +10,6 @@ import com.veinhorn.scrollgalleryview.loader.MediaLoader;
 /**
  * Created by veinhorn on 2/4/18.
  */
-
 public class PicassoImageLoader implements MediaLoader {
     private String url;
     private Integer thumbnailWidth;

@@ -1,1 +1,1 @@
-include ':library', ':app', ':glide-loader'
+include ':library', ':app', ':glide-loader', ':picasso-loader', ':fresco-loader'

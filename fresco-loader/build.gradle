@@ -1,17 +1,19 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+group='com.github.javaherisaber'
 
 android {
-    compileSdkVersion 29
-
+    compileSdkVersion config.compileSdk
     defaultConfig {
-        minSdkVersion 14
-        targetSdkVersion 29
-        versionCode 3
-        versionName "1.2.4"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        minSdkVersion config.minSdk
+        targetSdkVersion config.targetSdk
+        versionCode 15
+        versionName "1.3.0"
     }
-
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -22,39 +24,6 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-    implementation project(':library')
-    implementation 'com.facebook.fresco:fresco:1.11.0'
-    implementation 'androidx.appcompat:appcompat:1.0.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
+    api project(':library')
+    implementation "com.facebook.fresco:fresco:$versions.fresco"
 }
-
-ext {
-    bintrayRepo = 'maven'
-    bintrayName = 'fresco-loader'
-
-    publishedGroupId = 'com.veinhorn.scrollgalleryview'
-    libraryName = 'fresco-loader'
-    artifact = 'fresco-loader'
-
-    libraryDescription = 'Fresco image loader which you can use alongside ScrollGallery lib to load images.'
-
-    siteUrl = 'https://github.com/VEINHORN/ScrollGalleryView'
-    gitUrl = 'https://github.com/VEINHORN/ScrollGalleryView.git'
-
-    libraryVersion = '1.2.4'
-
-    developerId = 'veinhorn'
-    developerName = 'Boris Korogvich'
-    developerEmail = 'b.korogvich@gmail.com'
-
-    licenseName = 'The MIT License'
-    licenseUrl = 'https://opensource.org/licenses/MIT'
-    allLicenses = ["MIT"]
-}
-
-apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
-apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'

@@ -1,10 +1,7 @@
 package ogbe.ozioma.com.glideimageloader;
 
 import com.veinhorn.scrollgalleryview.MediaInfo;
-
 import java.util.List;
-
-import ogbe.ozioma.com.glideimageloader.GlideMediaHelper;
 
 public class DSL {
     private static GlideMediaHelper mediaHelper = new GlideMediaHelper();
