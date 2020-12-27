@@ -114,6 +114,16 @@ public class ScrollGalleryView extends LinearLayout {
         return (int) (pixel / context.getResources().getDisplayMetrics().density);
     }
 
+    public interface OnPageSelectedListener {
+        void onPageSelected(int position);
+    }
+
+    private OnPageSelectedListener onPageSelectedListener;
+
+    public void setOnPageSelectedListener(OnPageSelectedListener listener) {
+        this.onPageSelectedListener = listener;
+    }
+
     // Listeners
     private final ViewPager.SimpleOnPageChangeListener viewPagerChangeListener = new ViewPager.SimpleOnPageChangeListener() {
         @Override
@@ -124,6 +134,9 @@ public class ScrollGalleryView extends LinearLayout {
             showControls();
             updatePositionView();
             scroll(thumbnailsContainer.getChildAt(selectedIndex));
+            if (onPageSelectedListener != null) {
+                onPageSelectedListener.onPageSelected(position);
+            }
         }
     };
 
