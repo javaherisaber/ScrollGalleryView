@@ -1,5 +1,8 @@
-# 1.3.0
+# 1.3.1
+- Add onPageSelected listener
+- Upgrade AGP to 4.1.1
 
+# 1.3.0
 - Fix crash when using Glide 4.11.0
 - Flatten versioning for all artifacts
 - Force ltr direction for ViewPager and HorizontalScrollView
